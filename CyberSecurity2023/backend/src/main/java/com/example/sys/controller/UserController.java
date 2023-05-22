@@ -61,4 +61,33 @@ public class UserController {
         return Result.success("Logout successfully");
     }
 
+    @GetMapping("/search")
+    public Result<Map<String, Object>> getUserList(@RequestParam(value = "username", required = false) String username,
+                                          @RequestParam(value = "phone", required = false) String phone,
+                                          @RequestParam(value = "pageNo") Long pageNo,
+                                          @RequestParam(value = "pageSize") Integer pageSize,
+                                          @RequestHeader("X-Token") String token){
+
+        Boolean validUser = userService.validUser(token);
+
+        if(validUser){
+            Map<String, Object> userList = userService.searchUser(username, phone, pageNo, pageSize);
+            return Result.success(userList,"Found all user");
+        }
+
+        return Result.fail("Invalid user");
+
+    }
+
+    @GetMapping("/addUser")
+    public Result<User> addUser(@RequestParam("username") String userName, @RequestParam("phone") String phone){
+
+        User user = userService.addUser(userName, phone);
+        if(user != null){
+            return Result.success(user);
+        }
+
+        return Result.fail();
+    }
+
 }

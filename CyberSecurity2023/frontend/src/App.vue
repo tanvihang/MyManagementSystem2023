@@ -9,3 +9,14 @@ export default {
   name: 'App'
 }
 </script>
+
+<style>
+  .app-main{
+    padding: 2%;
+  }
+
+  .el-card{
+    margin-bottom: 10px;
+  }
+
+</style>

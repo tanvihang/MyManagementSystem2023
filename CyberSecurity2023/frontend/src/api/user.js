@@ -22,3 +22,12 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function searchUser(){
+  return request({
+    url: '/api/user/searchUser',
+    method: 'get',
+    params:{username, phone, pageNo, pageSize}
+  })
+}
+

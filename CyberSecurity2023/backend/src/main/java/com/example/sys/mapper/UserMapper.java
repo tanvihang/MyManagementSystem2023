@@ -3,6 +3,7 @@ package com.example.sys.mapper;
 import com.example.sys.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,4 +16,6 @@ import java.util.List;
  */
 public interface UserMapper extends BaseMapper<User> {
     public List<String> getRoleNameByUserId(Integer userId);
+
+    public User findUserWithUsernameAndPassword(HashMap<String, Object> map);
 }

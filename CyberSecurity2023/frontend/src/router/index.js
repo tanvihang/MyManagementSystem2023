@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Home', icon: 'santa-claus-svgrepo-com' }
+      meta: { title: 'Home', icon: '' }
     }]
   },
 
@@ -60,7 +60,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/sys/user',
     name: 'System Manager',
-    meta: { title: 'System Manager', icon: 'businessman-svgrepo-com' },
+    meta: { title: 'System Manager', icon: '' },
     children: [
       {
         path: 'user',
@@ -82,7 +82,7 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/test/test1',
     name: 'Test Manager',
-    meta: { title: 'Test Manager', icon: 'quack-svgrepo-com' },
+    meta: { title: 'Test Manager', icon: '' },
     children: [
       {
         path: 'test1',

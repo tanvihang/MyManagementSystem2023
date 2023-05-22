@@ -1,77 +1,67 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="Activity name">
-        <el-input v-model="form.name" />
+
+    <el-form ref="form" :model="formModel" label-width="130px">
+      <el-form-item label="Question title">
+        <el-input v-model="formModel.form_title" />
       </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="form.region" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
+
+      <el-form-item label="Question type">
+        <el-select v-model="formModel.form_type" placeholder="please select question type">
+          <el-option label="Usability" value="Usability" />
+          <el-option label="Improvement" value="Improvement" />
         </el-select>
       </el-form-item>
-      <el-form-item label="Activity time">
-        <el-col :span="11">
-          <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" />
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-time-picker v-model="form.date2" type="fixed-time" placeholder="Pick a time" style="width: 100%;" />
-        </el-col>
+
+      <el-form-item label="Leave a message">
+        <el-input v-model="formModel.form_message" type="textarea" />
       </el-form-item>
-      <el-form-item label="Instant delivery">
-        <el-switch v-model="form.delivery" />
-      </el-form-item>
-      <el-form-item label="Activity type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="Online activities" name="type" />
-          <el-checkbox label="Promotion activities" name="type" />
-          <el-checkbox label="Offline activities" name="type" />
-          <el-checkbox label="Simple brand exposure" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="Resources">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="Sponsor" />
-          <el-radio label="Venue" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Activity form">
-        <el-input v-model="form.desc" type="textarea" />
-      </el-form-item>
+
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
+        <el-button type="primary" @click="onSubmit">Send</el-button>
+        <el-button @click="onCancel">Clear</el-button>
       </el-form-item>
+
     </el-form>
   </div>
 </template>
 
 <script>
+import formApi from "@/api/form"
+
 export default {
   data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      formModel: {
+        form_title: '',
+        form_type: '',
+        form_message: ''
       }
     }
   },
   methods: {
     onSubmit() {
-      this.$message('submit!')
+      this.$message("submit!")
+      this.submitForm(this.formModel)
+      this.formModel.form_title = ""
+      this.formModel.form_type = ""
+      this.formModel.form_message = ""
     },
     onCancel() {
+
+      this.formModel.form_title = ""
+      this.formModel.form_type = ""
+      this.formModel.form_message = ""
+
       this.$message({
         message: 'cancel!',
         type: 'warning'
       })
+    },
+    submitForm(formModel){
+        formApi.submitForm(formModel).then(response => {
+          
+        })
     }
   }
 }

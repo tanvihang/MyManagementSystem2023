@@ -3,6 +3,7 @@ package com.example.sys.service;
 import com.example.sys.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,4 +21,10 @@ public interface IUserService extends IService<User> {
     Map<String, Object> getUserInfo(String token);
 
     void logout(String token);
+
+    Map<String, Object> searchUser(String username, String phone, Long pageNo, Integer pageSize);
+
+    Boolean validUser(String token);
+
+    User addUser(String userName, String phone);
 }

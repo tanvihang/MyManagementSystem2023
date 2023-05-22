@@ -9,4 +9,7 @@
           and a.user_id = #{userId}
     </select>
 
+    <select id="findUserWithUsernameAndPassword" parameterType="Map" resultType="com.example.sys.entity.User">
+        SELECT * from user where username = #{username} AND password = #{password}
+    </select>
 </mapper>
